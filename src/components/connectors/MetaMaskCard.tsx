@@ -136,7 +136,7 @@ export default function MetaMaskCard() {
 
   console.log("chainId:", chainId);
   console.log("isActive:", isActive);
-  console.log(process.env.REACT_APP_INFURA_KEY);
+  // console.log(process.env.REACT_APP_INFURA_KEY);
 
   return (
     <Card>
