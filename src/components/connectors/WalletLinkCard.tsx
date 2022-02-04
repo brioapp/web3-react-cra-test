@@ -1,48 +1,40 @@
-import { hooks, walletLink } from "../../connectors/walletLink";
-import { Accounts } from "../Accounts";
-import { Card } from "../Card";
-import { Chain } from "../Chain";
-import { Connect } from "../Connect";
-import { Status } from "../Status";
+import { hooks, walletLink } from '../../connectors/walletLink'
+import { Accounts } from '../Accounts'
+import { Card } from '../Card'
+import { Chain } from '../Chain'
+import { ConnectWithSelect } from '../ConnectWithSelect'
+import { Status } from '../Status'
 
-const {
-  useChainId,
-  useAccounts,
-  useError,
-  useIsActivating,
-  useIsActive,
-  useProvider,
-  useENSNames,
-} = hooks;
+const { useChainId, useAccounts, useError, useIsActivating, useIsActive, useProvider, useENSNames } = hooks
 
 export default function WalletLinkCard() {
-  const chainId = useChainId();
-  const accounts = useAccounts();
-  const error = useError();
-  const isActivating = useIsActivating();
+  const chainId = useChainId()
+  const accounts = useAccounts()
+  const error = useError()
+  const isActivating = useIsActivating()
 
-  const isActive = useIsActive();
+  const isActive = useIsActive()
 
-  const provider = useProvider();
-  const ENSNames = useENSNames(provider);
+  const provider = useProvider()
+  const ENSNames = useENSNames(provider)
 
   return (
     <Card>
       <div>
         <b>WalletLink</b>
         <Status isActivating={isActivating} error={error} isActive={isActive} />
-        <div style={{ marginBottom: "1rem" }} />
+        <div style={{ marginBottom: '1rem' }} />
         <Chain chainId={chainId} />
         <Accounts accounts={accounts} provider={provider} ENSNames={ENSNames} />
       </div>
-      <div style={{ marginBottom: "1rem" }} />
-      <Connect
-        activate={() => walletLink.activate()}
-        deactivate={() => walletLink.deactivate()}
+      <div style={{ marginBottom: '1rem' }} />
+      <ConnectWithSelect
+        connector={walletLink}
+        chainId={chainId}
         isActivating={isActivating}
         error={error}
         isActive={isActive}
       />
     </Card>
-  );
+  )
 }
